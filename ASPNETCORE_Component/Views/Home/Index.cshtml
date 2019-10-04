@@ -1,0 +1,33 @@
+﻿@using ASPNETCORE_Component.Components
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@*followings ways to call component in View:-*@
+
+<h2>View Component Using IViewComponentHelper:-</h2>
+<br>
+@await Component.InvokeAsync("MyPriorityList", new { ItemCount = 4 })
+<br>
+<br>
+
+@*Invoking a view component as a Tag Helper*@
+
+<h3>View Component Using Tag Helper:-</h3>
+<br>
+<vc:my-priority-list item-count="3"></vc:my-priority-list>
+
+
+<h2>ViewComponent nameof :-</h2>
+
+<div>
+
+    @*
+        Note:
+        To use the below line, you need to #define no_suffix in ViewComponents/PriorityList.cs or it won't compile.
+        By doing so it will cause a problem to index as there will be multiple viewcomponents
+        with the same name after the compiler removes the suffix "ViewComponent"
+    *@
+
+    @await Component.InvokeAsync(nameof(MyPriorityList), new { ItemCount = 5 })
+</div>
